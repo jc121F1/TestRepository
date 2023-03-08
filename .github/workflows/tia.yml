@@ -46,5 +46,8 @@ jobs:
     - name: Save testimpact artifacts
       uses: actions/cache/save@v3
       with:
-        key: testimpactfiles
+        key: testimpactfiles-${{ runner.os }}-${{ github.run_id }}
         path: coverage_dir
+        restore-keys:
+          testimpactfiles-${{ runner.os }}
+        
