@@ -31,9 +31,6 @@ jobs:
       with:
         key: testimpactfiles
         path: coverage_dir
-    - name: Display structure of downloaded files
-      run: ls -R
-      working-directory: coverage_dir
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
