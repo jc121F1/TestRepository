@@ -31,7 +31,7 @@ jobs:
       with:
         key: testimpactfiles-${{ runner.os }}-${{ github.run_id }}
         path: coverage_dir
-        restore-keys:
+        restore-keys: |
           testimpactfiles-${{ runner.os }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
