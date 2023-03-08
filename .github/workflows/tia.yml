@@ -27,9 +27,9 @@ jobs:
       with:
         path: TIA/tests
     - name: Download testimpact artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/cache/restore@v3
       with:
-        name: testimpactfiles
+        key: testimpactfiles
         path: coverage_dir
     - name: Display structure of downloaded files
       run: ls -R
@@ -47,7 +47,7 @@ jobs:
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
     - name: Save testimpact artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/cache/save@v3
       with:
-        name: testimpactfiles
+        key: testimpactfiles
         path: coverage_dir
