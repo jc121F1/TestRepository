@@ -18,9 +18,9 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
-      echo "$GITHUB_CONTEXT"
-      git show ${{ github.event.pull_request.base.sha }}
-      git show ${{ github.event.pull_request.head.sha }}
+        echo "$GITHUB_CONTEXT"
+        git show ${{ github.event.pull_request.base.sha }}
+        git show ${{ github.event.pull_request.head.sha }}
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
