@@ -27,9 +27,3 @@ jobs:
     - name: Generate Report
       run: |
         test_impact_analysis_launcher.py --init-commit $GITHUB_HEAD_REF --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
-        coverage xml
-    - name: "Upload coverage to Codecov"
-      uses: codecov/codecov-action@v2
-      with:
-        fail_ci_if_error: true
-        token: b2039aa6-06e3-4b3d-a279-b9e71c398d9a
