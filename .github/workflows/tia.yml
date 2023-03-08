@@ -27,10 +27,12 @@ jobs:
       with:
         path: TIA/tests
     - name: Download testimpact artifacts
-      uses: actions/cache/restore@v3
+      uses: actions/cache@v3
       with:
-        key: testimpactfiles
+        key: testimpactfiles-${{ runner.os }}-${{ github.run_id }}
         path: coverage_dir
+        restore-keys:
+          testimpactfiles-${{ runner.os }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -43,11 +45,3 @@ jobs:
     - name: Select Tests and Execute 
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
-    - name: Save testimpact artifacts
-      uses: actions/cache/save@v3
-      with:
-        key: testimpactfiles-${{ runner.os }}-${{ github.run_id }}
-        path: coverage_dir
-        restore-keys:
-          testimpactfiles-${{ runner.os }}
-        
