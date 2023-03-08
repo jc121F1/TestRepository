@@ -37,4 +37,4 @@ jobs:
         pip install -r TIA/requirements.txt
     - name: Generate Report
       run: |
-        python TIA/test_impact_launcher.py --init-commit ${{ github.sha }} --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
+        python TIA/test_impact_launcher.py --init-commit ${{ github.sha }} --final-commit ${{ github.event.base.sha }} --changelist-generator git --test-architecture pytest
