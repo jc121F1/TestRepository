@@ -29,7 +29,6 @@ jobs:
         repository: jc121f1/TestImpactAnalysis
         token: ${{ secrets.GH_PT }}
         path: TIA
-
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
