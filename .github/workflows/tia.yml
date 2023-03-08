@@ -9,6 +9,7 @@ on:
 jobs:
   run:
     runs-on: windows-latest
+    environment: testing
     strategy:
       max-parallel: 4
       matrix:
