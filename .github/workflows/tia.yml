@@ -16,6 +16,10 @@ jobs:
         python-version: [3.9]
 
     steps:
+    - name: Show GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
@@ -35,4 +39,4 @@ jobs:
         pip install -r TIA/requirements.txt
     - name: Generate Report
       run: |
-        python TIA/test_impact_launcher.py --init-commit $GITHUB_HEAD_REF --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
+        python TIA/test_impact_launcher.py --init-commit ${{ github.sha }} --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
