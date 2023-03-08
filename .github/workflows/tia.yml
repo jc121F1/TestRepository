@@ -13,11 +13,6 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - name: Show GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: |
-        echo "$GITHUB_CONTEXT"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -33,11 +28,13 @@ jobs:
         path: TIA
     - name: Install Dependencies
       run: |
-        git show ${{ github.event.pull_request.base.sha }}
-        git show ${{ github.event.pull_request.head.sha }}
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r TIA/requirements.txt
-    - name: Generate Report
+    - name: Remove File
+      uses: JesseTG/rm@v1.0.0
+      with:
+        path: TIA/tests
+    - name: Select Tests and Execute 
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
