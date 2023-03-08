@@ -16,13 +16,13 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
     - name: Checkout TIA
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: jc121f1/TestImpactAnalysis
         token: ${{ secrets.GH_PT }}
@@ -35,4 +35,4 @@ jobs:
         pip install -r TIA/requirements.txt
     - name: Generate Report
       run: |
-        python TIA/test_impact_analysis_launcher.py --init-commit $GITHUB_HEAD_REF --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
+        python TIA/test_impact_launcher.py --init-commit $GITHUB_HEAD_REF --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
