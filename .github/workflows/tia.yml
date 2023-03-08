@@ -24,7 +24,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: jc121f1/TestImpactAnalysis
-        token: ${{ secrets.GH_PAT }}
+        token: ${{ secrets.GH_PT }}
         path: TIA
 
     - name: Install Dependencies
