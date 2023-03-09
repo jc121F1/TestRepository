@@ -1,8 +1,6 @@
 name: Test Impact Analysis
-
+ 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -11,32 +9,39 @@ jobs:
     runs-on: windows-latest
     environment: testing
     strategy:
-      max-parallel: 4
       matrix:
         python-version: [3.9]
 
     steps:
-    - name: Show GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        fetch-depth: 0
     - name: Checkout TIA
       uses: actions/checkout@v3
       with:
         repository: jc121f1/TestImpactAnalysis
         token: ${{ secrets.GH_PT }}
         path: TIA
-
+    - name: Remove File
+      uses: JesseTG/rm@v1.0.0
+      with:
+        path: TIA/tests
+    - name: Download testimpact artifacts
+      uses: actions/cache@v3
+      with:
+        key: testimpactfiles-${{ runner.os }}-${{ github.run_id }}
+        path: coverage_dir
+        restore-keys: |
+          testimpactfiles-${{ runner.os }}
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r TIA/requirements.txt
-    - name: Generate Report
+    - name: Select Tests and Execute 
       run: |
-        python TIA/test_impact_launcher.py --init-commit ${{ github.sha }} --final-commit $GITHUB_BASE_REF --changelist-generator git --test-architecture pytest
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
