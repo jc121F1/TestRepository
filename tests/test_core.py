@@ -2,7 +2,7 @@ import pytest
 import time
 from core import main
 
-def test_all():
+def test_cool_stuff():
     assert 1 == 1
 
 def test_main():
