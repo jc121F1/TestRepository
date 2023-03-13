@@ -28,11 +28,8 @@ jobs:
       with:
         path: TIA/tests
     - name: Create .coveragerc file
-      uses: finnp/create-file-action@1.0.0
-      env:  
-        FILE_NAME: ".coveragerc"
-        FILE_DATA: "[run]
-                    dynamic_context = test_function"
+      run: |
+        .\setupcoverage.bat
     - name: Download testimpact artifacts
       uses: actions/cache@v3
       with:
