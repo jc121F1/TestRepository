@@ -2,13 +2,13 @@ from feature2 import Feature2
 import pytest
 import time
 
-class Feature2Tests():
+class Test_Feature2Tests():
 
-    def test_feature2method1():
+    def test_feature2method1(self):
         assert Feature2.feature2method1() == False
 
-    def test_feature2method2():
+    def test_feature2method2(self):
         assert Feature2.feature2method2() == True
 
-    def test_feature2method3():
-        assert Feature2.feature2method3 == False
+    def test_feature2method3(self):
+        assert Feature2.feature2method3() == True

@@ -13,4 +13,4 @@ class Feature2():
 
     def feature2method3():
         time.sleep(4)
-        return False
+        return True
