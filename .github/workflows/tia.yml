@@ -44,6 +44,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r TIA/requirements.txt
-    - name: Select Tests and Execute 
+    - name: Select Tests with Covering Tests policy and Execute 
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
+    - name: Select Tests with all tests policy and Execute
+      run: |
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --test-selection-policy all
