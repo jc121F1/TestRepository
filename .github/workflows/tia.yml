@@ -58,7 +58,7 @@ jobs:
         python TIA/test_impact_launcher.py --init-commit a57a4766ff41657a463594ffa2506c21a37e571e --final-commit 117f0a4e229132008efec16b0f8a47cb0f2eeee0 --changelist-generator git --test-architecture pytest --test-selection-policy covering_tests
     - name: IgnoreDirectories
       run: |
-        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --ignore-directories "./feature2, ./feature3"
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --ignore-directories "./feature2, ./feature3" --ignore-files ".github/workflows/tia.yml"
     - name: IgnoreFiles
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --ignore-files ".github/workflows/tia.yml"
