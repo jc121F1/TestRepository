@@ -10,3 +10,7 @@ class Feature3():
     def feature3method2(self):
         time.sleep(1)
         return True
+    
+    def feature3method3(self):
+        time.sleep(1)
+        return True
