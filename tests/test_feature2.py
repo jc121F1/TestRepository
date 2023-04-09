@@ -6,4 +6,5 @@ class Test_Feature2Tests():
         assert Feature2().feature2method1() == False
 
     def test_feature2method2(self):
+        print("Dummy change")
         assert Feature2().feature2method2() == True
