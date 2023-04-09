@@ -1,9 +1,7 @@
 venv/
-testimpactanalysis/
 virtualenv/
 coverage_dir/
 .vscode/
-testimpactanalysis/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
