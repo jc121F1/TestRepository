@@ -45,3 +45,21 @@ jobs:
     - name: Select Tests and Execute 
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
+    - name: TestSelectionPolicy all
+      run: |
+        python TIA/test_impact_launcher.py --init-commit DUMMY_COMMIT --final-commit DUMMY_COMMIT2 --changelist-generator git test-architecture pytest --test-selection-policy all
+    - name: TestSelectionPolicy coveringTests
+      run: |
+        python TIA/test_impact_launcher.py --init-commit DUMMY_COMMIT --final-commit DUMMY_COMMIT2 --changelist-generator git test-architecture pytest --test-selection-policy covering_tests
+    - name: IgnoreDirectories
+      run: |
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --ignore-directories "./feature2, ./feature3"
+    - name: IgnoreFiles
+      run: |
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --ignore-files ".github/workflows/tia.yml"
+    - name: ExecutionMode Execute
+      run: |
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --execution-mode execute
+    - name: ExecutionMode list tests
+      run: |
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --execution-mode list
