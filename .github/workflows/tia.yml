@@ -3,7 +3,6 @@ name: Test Impact Analysis
 on:
   pull_request:
     branches: [ main ]
-
 jobs:
   run:
     runs-on: windows-latest
@@ -26,6 +25,9 @@ jobs:
       uses: JesseTG/rm@v1.0.0
       with:
         path: TIA/tests
+    - name: Create .coveragerc file
+      run: |
+        .\TIA\setupcoverage.bat
     - name: Download testimpact artifacts
       uses: actions/cache@v3
       with:
@@ -42,9 +44,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r TIA/requirements.txt
-    - name: Select Tests and Execute 
+    - name: Select Tests with Covering Tests policy and Execute 
       run: |
         python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest
+    - name: Select Tests with all tests policy and Execute
+      run: |
+        python TIA/test_impact_launcher.py --init-commit ${{ github.event.pull_request.base.sha }} --final-commit ${{ github.event.pull_request.head.sha }} --changelist-generator git --test-architecture pytest --test-selection-policy all
     - name: TestSelectionPolicy all
       run: |
         python TIA/test_impact_launcher.py --init-commit DUMMY_COMMIT --final-commit DUMMY_COMMIT2 --changelist-generator git test-architecture pytest --test-selection-policy all
