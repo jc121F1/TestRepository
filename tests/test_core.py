@@ -1,4 +1,3 @@
-import pytest
 import time
 from core import main
 
