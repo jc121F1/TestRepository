@@ -4,7 +4,7 @@ import time
 class Feature3():
 
     def feature3method1(self):
-        time.sleep(5)
+        time.sleep(4)
         return True
 
     def feature3method2(self):
