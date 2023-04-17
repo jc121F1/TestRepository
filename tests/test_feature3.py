@@ -7,3 +7,6 @@ class Test_Feature3Tests():
 
     def test_feature3method2(self):
         assert Feature3().feature3method2() == True
+
+    def test_feature3_method3(self):
+        assert Feature3().feature3method3 == True
